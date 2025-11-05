@@ -105,27 +105,29 @@ def run_once(server: str, port: int, payload: Dict[str, Any], log, out_path: str
         if resp is None:
             if log:
                 log.error("Sin respuesta del servidor (None).")
-            print(json.dumps({"OK": False, "Error": "No response"}, ensure_ascii=False))
+            print(json.dumps({"OK": False, "Error": "No response"}, ensure_ascii=False, indent=2))
             return 1
 
+        # Siempre imprimir la respuesta formateada por stdout
+        print(json.dumps(resp, ensure_ascii=False, indent=2))
+        
+        # Si se especificó archivo de salida, también guardarlo
         if out_path:
             save_json(out_path, resp)
-        else:
-            print(json.dumps(resp, ensure_ascii=False, indent=2))
 
         if log:
-            log.debug(f"Response: {json.dumps(resp, ensure_ascii=False)}")
+            log.debug(f"Response: {json.dumps(resp, ensure_ascii=False, indent=2)}")
         return 0
 
     except (ConnectionRefusedError, socket.timeout, OSError) as e:
         if log:
             log.error(f"Error de conexión: {e}")
-        print(json.dumps({"OK": False, "Error": f"{type(e).__name__}: {e}"}, ensure_ascii=False))
+        print(json.dumps({"OK": False, "Error": f"{type(e).__name__}: {e}"}, ensure_ascii=False, indent=2))
         return 2
     except Exception as e:
         if log:
             log.exception("Fallo inesperado:")
-        print(json.dumps({"OK": False, "Error": f"{type(e).__name__}: {e}"}, ensure_ascii=False))
+        print(json.dumps({"OK": False, "Error": f"{type(e).__name__}: {e}"}, ensure_ascii=False, indent=2))
         return 3
 
 

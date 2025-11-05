@@ -146,8 +146,6 @@ class TestHappyPath:
     
     def test_subscribe_action_happy_path(self, server_process):
         """Test de camino feliz para acción SUBSCRIBE."""
-        import threading
-        import time
         from common.net import send_json, recv_json
         
         port, _ = server_process

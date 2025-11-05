@@ -2,7 +2,6 @@
 Fixtures compartidos para tests de aceptación.
 """
 import os
-import shutil
 import subprocess
 import socket
 import time
@@ -35,15 +34,13 @@ def clean_mock_db():
     """Fixture que limpia la BD antes y después de cada test."""
     cleanup_mock_db()
     yield
-    # cleanup_mock_db()  # Comentado para poder ver los datos después de los tests
+    cleanup_mock_db()
 
 
 @pytest.fixture(scope="function")
 def server_process(clean_mock_db):
     """Fixture que inicia el servidor y lo detiene después."""
-    # Limpiar BD antes de iniciar
-    cleanup_mock_db()
-    
+    # clean_mock_db ya limpia la BD antes de ejecutar este fixture
     # Iniciar servidor en un puerto disponible
     port = find_free_port()
     

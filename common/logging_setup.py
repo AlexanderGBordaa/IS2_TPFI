@@ -6,4 +6,14 @@ def setup(verbose: bool=False):
         level=level,
         format="%(asctime)s %(levelname)s %(name)s – %(message)s"
     )
-    return logging.getLogger("is2")
+    
+    # Silenciar loggers de AWS a WARNING para evitar ruido de DEBUG
+    logging.getLogger("botocore").setLevel(logging.WARNING)
+    logging.getLogger("boto3").setLevel(logging.WARNING)
+    logging.getLogger("urllib3").setLevel(logging.WARNING)
+    
+    # Configurar logger de la aplicación
+    app_logger = logging.getLogger("is2")
+    app_logger.setLevel(level)
+    
+    return app_logger

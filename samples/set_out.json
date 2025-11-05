@@ -1,7 +1,11 @@
 {
   "OK": true,
   "DATA": {
-    "web": "uaderfcyt_cdu@gmail.com.ar",
-    "id": "TEST-ITEM-0010"
+    "web": "uader_fcyt_cdu@edu.com.ar",
+    "id": "UADER-FCyT-IS1",
+    "localidad": "Concepción del Uruguay",
+    "cp": "3260",
+    "provincia": "Entre Ríos",
+    "direccion": "25 de Mayo 385"
   }
 }
